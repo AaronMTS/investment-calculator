@@ -2,6 +2,7 @@ import { useState } from "react";
 import Header from "./components/Header";
 import ResultsTable from "./components/ResultsTable";
 import NumInput from "./components/NumInput";
+import UserInput from "./components/UserInput";
 
 const INITIAL_INVESTMENT_FACTORS = {
   initialInvestment: '',
@@ -23,21 +24,11 @@ function App() {
   }
 
   return (
-    <main>
+    <>
       <Header />
-      <div id="user-input">
-        <div className="input-group">
-          <NumInput id="initialInvestment" label="Initial Investment" onUpdateInvFactor={handleChangeInput} />
-          <NumInput id="annualInvestment" label="Annual Investment" onUpdateInvFactor={handleChangeInput} />
-        </div>
-        <br />
-        <div className="input-group">
-          <NumInput id="expectedReturn" label="Expected Return" onUpdateInvFactor={handleChangeInput} />
-          <NumInput id="duration" label="Duration" onUpdateInvFactor={handleChangeInput} />
-        </div>
-      </div>
+      <UserInput inputValues={investmentFactors} onValueChange={handleChangeInput} />
       <ResultsTable calculationParameters={investmentFactors} />
-    </main>
+    </>
   );
 }
 
