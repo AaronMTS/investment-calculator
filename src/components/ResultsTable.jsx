@@ -2,23 +2,27 @@ import { calculateInvestmentResults, formatter } from "../util/investment.js";
 
 const isFullyPopulated = (obj) => Object.values(obj).every(parameter => parameter)
 
-const noDataFallback = (
+const invalidInputFallback = (errorMessage) => (
   <tr>
     <td colSpan={5} className="center">
       <small>
-        <em>Enter value to all required fields...</em>
+        <em>{errorMessage}</em>
       </small>
     </td>
   </tr>
 );
 
 const ResultsTable = ({ calculationParameters }) => {
-  const { initialInvestment } =
+  const { initialInvestment, duration } =
     calculationParameters;
   let investmentInterests;
+  let allInputHasValue;
+
+  const inputIsValid = duration > 0 && duration !=='';
 
   if (isFullyPopulated(calculationParameters)) {
-    investmentInterests = calculateInvestmentResults(calculationParameters);
+    allInputHasValue = true;
+    investmentInterests = inputIsValid && calculateInvestmentResults(calculationParameters);
   }
 
   return (
@@ -47,7 +51,8 @@ const ResultsTable = ({ calculationParameters }) => {
             </tr>
           )
           })}
-        {!investmentInterests && noDataFallback}
+        {!allInputHasValue && invalidInputFallback("Enter value to all required fields...")}
+        {(allInputHasValue && !inputIsValid) && invalidInputFallback("Enter a duration greater than zero.") }
       </tbody>
     </table>
   );
