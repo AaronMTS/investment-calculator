@@ -1,7 +1,6 @@
 import { useState } from "react";
 import Header from "./components/Header";
 import ResultsTable from "./components/ResultsTable";
-import NumInput from "./components/NumInput";
 import UserInput from "./components/UserInput";
 
 const INITIAL_INVESTMENT_FACTORS = {
@@ -19,7 +18,7 @@ function App() {
   const handleChangeInput = (identifier, newValue) => {
     setInvestmentFactors(prevFactors => ({
       ...prevFactors,
-      [identifier]: Number(newValue)
+      [identifier]: +newValue
     }))
   }
 
