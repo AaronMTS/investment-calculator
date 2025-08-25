@@ -1,3 +1,7 @@
+## Introduction
+
+A simple and interactive web app that helps users visualize the growth of their investments over time.
+
 ## Features
 
 * Enter your **initial investment**.
@@ -21,4 +25,4 @@
 * Understanding compound growth visually.
 
 > [!NOTE]
-> This was created as part of a course in [Udemy](https://www.udemy.com/).
+> This was created as part of an online course offered by [Maximilian Schwarzmüller](https://github.com/maxschwarzmueller).
