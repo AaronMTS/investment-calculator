@@ -33,29 +33,37 @@ function App() {
 
   return (
     <>
-      <Header />
-      <UserInput
-        inputValues={investmentFactors}
-        onValueChange={handleChangeInput}
-        isDurationInvalid={!isDurationValid}
-      />
-      {allInputHasValue && isDurationValid && (
-        <ResultsTable calculationParameters={investmentFactors} />
-      )}
-      {!allInputHasValue && (
-        <p className="center">
-          <small>
-            <em>Enter value to all required fields.</em>
-          </small>
+      <div>
+        <Header />
+        <UserInput
+          inputValues={investmentFactors}
+          onValueChange={handleChangeInput}
+          isDurationInvalid={!isDurationValid}
+        />
+        {allInputHasValue && isDurationValid && (
+          <ResultsTable calculationParameters={investmentFactors} />
+        )}
+        {!allInputHasValue && (
+          <p className="center">
+            <small>
+              <em>Enter value to all required fields.</em>
+            </small>
+          </p>
+        )}
+        {allInputHasValue && !isDurationValid && (
+          <p className="center">
+            <small>
+              <em>Invalid duration.</em>
+            </small>
+          </p>
+        )}
+      </div>
+      <footer>
+        <p>
+          This was created as part of an online course offered by Maximilian
+          Schwarzmüller
         </p>
-      )}
-      {allInputHasValue && !isDurationValid && (
-        <p className="center">
-          <small>
-            <em>Invalid duration.</em>
-          </small>
-        </p>
-      )}
+      </footer>
     </>
   );
 }
