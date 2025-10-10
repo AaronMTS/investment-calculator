@@ -26,8 +26,10 @@ function App() {
   };
 
   const allInputHasValue = isFullyPopulated(investmentFactors);
-  const inputIsValid =
-    investmentFactors.duration > 0 && investmentFactors.duration !== "";
+  const isDurationValid =
+    investmentFactors.duration > 0 &&
+    investmentFactors.duration <= 20 &&
+    investmentFactors.duration !== "";
 
   return (
     <>
@@ -35,8 +37,9 @@ function App() {
       <UserInput
         inputValues={investmentFactors}
         onValueChange={handleChangeInput}
+        isDurationInvalid={!isDurationValid}
       />
-      {allInputHasValue && inputIsValid && (
+      {allInputHasValue && isDurationValid && (
         <ResultsTable calculationParameters={investmentFactors} />
       )}
       {!allInputHasValue && (
@@ -46,10 +49,10 @@ function App() {
           </small>
         </p>
       )}
-      {allInputHasValue && !inputIsValid && (
+      {allInputHasValue && !isDurationValid && (
         <p className="center">
           <small>
-            <em>Enter a duration greater than zero.</em>
+            <em>Invalid duration.</em>
           </small>
         </p>
       )}

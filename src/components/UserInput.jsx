@@ -1,4 +1,10 @@
-const UserInput = ({ inputValues, onValueChange }) => {
+const UserInput = ({ inputValues, onValueChange, isDurationInvalid }) => {
+  let durationStyling = "";
+
+  if (inputValues.duration && isDurationInvalid) {
+    durationStyling = "invalid";
+  }
+
   return (
     <div id="user-input">
       <div className="input-group">
@@ -41,8 +47,9 @@ const UserInput = ({ inputValues, onValueChange }) => {
           />
         </p>
         <p>
-          <label htmlFor="inv_duration">Duration</label>
+          <label htmlFor="inv_duration">Duration (max: 20)</label>
           <input
+            className={durationStyling}
             type="number"
             id="inv_duration"
             required
