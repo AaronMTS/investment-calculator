@@ -1,7 +1,7 @@
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import Header from "./components/Header";
 import ResultsTable from "./components/ResultsTable";
-import UserInput from "./components/UserInput";
+import InputGroup from "./components/InputGroup";
 
 const INITIAL_INVESTMENT_FACTORS = {
   initialInvestment: "",
@@ -18,12 +18,12 @@ function App() {
     INITIAL_INVESTMENT_FACTORS
   );
 
-  const handleChangeInput = (identifier, newValue) => {
+  const handleChangeInput = useCallback((identifier, newValue) => {
     setInvestmentFactors((prevFactors) => ({
       ...prevFactors,
-      [identifier]: +newValue,
+      [identifier]: +newValue || "",
     }));
-  };
+  }, []);
 
   const allInputHasValue = isFullyPopulated(investmentFactors);
   const isDurationValid =
@@ -35,13 +35,15 @@ function App() {
     <>
       <div>
         <Header />
-        <UserInput
+        <InputGroup
           inputValues={investmentFactors}
           onValueChange={handleChangeInput}
           isDurationInvalid={!isDurationValid}
         />
         {allInputHasValue && isDurationValid && (
-          <ResultsTable calculationParameters={investmentFactors} />
+          <div id="result_container">
+            <ResultsTable calculationParameters={investmentFactors} />
+          </div>
         )}
         {!allInputHasValue && (
           <p className="center">
