@@ -1,12 +1,13 @@
-import investmentCalculator from "../assets/investment-calculator-logo.png"
+import { memo } from "react";
+import investmentCalculator from "../assets/investment-calculator-logo.png";
 
-const Header = () => {
+const Header = memo(function Header() {
   return (
     <header id="header">
-        <img src={investmentCalculator} alt="Sack of money" />
-        <h1>Investment Calculator</h1>
+      <img src={investmentCalculator} alt="Sack of money" />
+      <h1>Investment Calculator</h1>
     </header>
-  )
-}
+  );
+});
 
-export default Header
+export default Header;

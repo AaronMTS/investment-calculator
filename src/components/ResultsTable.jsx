@@ -1,7 +1,7 @@
 import { calculateInvestmentResults, formatter } from "../util/investment.js";
 
 const ResultsTable = ({ calculationParameters }) => {
-  const { initialInvestment, duration } =
+  const { initialInvestment } =
     calculationParameters;
   const investmentInterests = calculateInvestmentResults(calculationParameters);
 
@@ -18,9 +18,10 @@ const ResultsTable = ({ calculationParameters }) => {
       </thead>
       <tbody>
         {investmentInterests.map((rows, index) => {
-            const investedCapital = initialInvestment + (rows.annualInvestment * rows.year);
+          const investedCapital =
+            initialInvestment + rows.annualInvestment * rows.year;
 
-            return (
+          return (
             <tr key={index}>
               <td>{rows.year}</td>
               <td>{formatter.format(rows.valueEndOfYear)}</td>
@@ -28,8 +29,8 @@ const ResultsTable = ({ calculationParameters }) => {
               <td>{formatter.format(rows.valueEndOfYear - investedCapital)}</td>
               <td>{formatter.format(investedCapital)}</td>
             </tr>
-          )
-          })}
+          );
+        })}
       </tbody>
     </table>
   );
